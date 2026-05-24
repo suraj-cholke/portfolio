@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Suraj Cholke | Full Stack Java Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      overflow-x: hidden;
+    }
+
+    body::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    body::-webkit-scrollbar-thumb {
+      background: #38bdf8;
+      border-radius: 10px;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 8%;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .logo {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #38bdf8;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      transition: 0.3s ease;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: #38bdf8;
+    }
+
+    section {
+      padding: 110px 8% 80px;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+      background: radial-gradient(circle at top left, #1e293b 0%, #0f172a 55%);
+    }
+
+    .hero-text {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .hero-text h3 {
+      color: #38bdf8;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .hero-text h1 {
+      font-size: 4rem;
+      line-height: 1.1;
+      margin-bottom: 15px;
+    }
+
+    .hero-text h2 {
+      font-size: 1.8rem;
+      color: #cbd5e1;
+      margin-bottom: 20px;
+    }
+
+    .hero-text p {
+      max-width: 650px;
+      line-height: 1.8;
+      color: #cbd5e1;
+      margin-bottom: 30px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s ease;
+      border: 2px solid #38bdf8;
+    }
+
+    .btn-primary {
+      background: #38bdf8;
+      color: #0f172a;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(56,189,248,0.4);
+    }
+
+    .btn-outline {
+      color: #38bdf8;
+    }
+
+    .btn-outline:hover {
+      background: #38bdf8;
+      color: #0f172a;
+    }
+
+    .hero-card {
+      flex: 1;
+      min-width: 320px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 25px;
+      padding: 35px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    }
+
+    .hero-card h3 {
+      color: #38bdf8;
+      margin-bottom: 20px;
+      font-size: 1.4rem;
+    }
+
+    .info-item {
+      margin-bottom: 18px;
+    }
+
+    .info-item span {
+      display: block;
+      color: #94a3b8;
+      margin-bottom: 5px;
+      font-size: 0.9rem;
+    }
+
+    .info-item strong {
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h2 {
+      font-size: 2.8rem;
+      color: #38bdf8;
+      margin-bottom: 12px;
+    }
+
+    .section-title p {
+      color: #94a3b8;
+    }
+
+    .about-grid,
+    .skills-grid,
+    .projects-grid,
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 28px;
+      transition: 0.4s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: #38bdf8;
+      box-shadow: 0 20px 40px rgba(56,189,248,0.15);
+    }
+
+    .card h3 {
+      color: #38bdf8;
+      margin-bottom: 15px;
+    }
+
+    .card p,
+    .card li {
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+
+    .skill-bar {
+      margin-bottom: 18px;
+    }
+
+    .skill-bar .label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .progress {
+      height: 10px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(to right, #38bdf8, #0ea5e9);
+      border-radius: 10px;
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 4px;
+      height: 100%;
+      background: #38bdf8;
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      width: 50%;
+      padding: 20px 40px;
+      position: relative;
+    }
+
+    .timeline-item:nth-child(odd) {
+      left: 0;
+      text-align: right;
+    }
+
+    .timeline-item:nth-child(even) {
+      left: 50%;
+    }
+
+    .timeline-content {
+      background: rgba(255,255,255,0.04);
+      padding: 25px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .timeline-content h3 {
+      color: #38bdf8;
+      margin-bottom: 10px;
+    }
+
+    .contact {
+      text-align: center;
+    }
+
+    .contact-links {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .contact-links a {
+      text-decoration: none;
+      color: #fff;
+      padding: 14px 24px;
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: 0.3s ease;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .contact-links a:hover {
+      background: #38bdf8;
+      color: #0f172a;
+      transform: translateY(-5px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #94a3b8;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease;
+    }
+
+    .fade-in.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media(max-width: 900px) {
+      .hero-text h1 {
+        font-size: 3rem;
+      }
+
+      .timeline::before {
+        left: 20px;
+      }
+
+      .timeline-item {
+        width: 100%;
+        left: 0 !important;
+        padding-left: 60px;
+        padding-right: 20px;
+        text-align: left !important;
+      }
+    }
+
+    @media(max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero {
+        padding-top: 140px;
+      }
+
+      .hero-text h1 {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">Suraj Cholke</div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="hero-text fade-in">
+      <h3>Hello, I'm</h3>
+      <h1>Suraj Cholke</h1>
+      <h2>Full Stack Java Developer</h2>
+      <p>
+        Passionate Full Stack Java Developer focused on building scalable, secure, and modern web applications using Java, Spring Boot, React, JDBC, PostgreSQL, MySQL, and REST APIs. Dedicated to writing clean code, solving real-world problems, and continuously improving technical skills.
+      </p>
+
+      <div class="btn-group">
+        <a href="#contact" class="btn btn-primary">Hire Me</a>
+        <a href="https://www.linkedin.com/in/suraj-cholke" target="_blank" class="btn btn-outline">LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="hero-card fade-in">
+      <h3>Professional Profile</h3>
+
+      <div class="info-item">
+        <span>Email</span>
+        <strong>surajcholke1111@gmail.com</strong>
+      </div>
+
+      <div class="info-item">
+        <span>Mobile</span>
+        <strong>+91 8390442256</strong>
+      </div>
+
+      <div class="info-item">
+        <span>Location</span>
+        <strong>Pune, Maharashtra, India</strong>
+      </div>
+
+      <div class="info-item">
+        <span>Specialization</span>
+        <strong>Java Full Stack Development</strong>
+      </div>
+
+      <div class="info-item">
+        <span>Tech Stack</span>
+        <strong>Java, Spring Boot, React, PostgreSQL</strong>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-title fade-in">
+      <h2>About Me</h2>
+      <p>Professional Summary & Career Objective</p>
+    </div>
+
+    <div class="about-grid">
+      <div class="card fade-in">
+        <h3>Professional Summary</h3>
+        <p>
+          Enthusiastic and detail-oriented Java Developer with strong knowledge of Full Stack Development. Skilled in building backend systems using Java, JDBC, and Spring Boot while creating responsive user interfaces using React and modern frontend technologies.
+        </p>
+      </div>
+
+      <div class="card fade-in">
+        <h3>Career Objective</h3>
+        <p>
+          Seeking an opportunity to work in a growth-oriented organization where I can enhance my development skills, contribute to innovative projects, and gain hands-on industry experience in software engineering and full stack development.
+        </p>
+      </div>
+
+      <div class="card fade-in">
+        <h3>Strengths</h3>
+        <ul>
+          <li>Quick Learner & Problem Solver</li>
+          <li>Strong Logical Thinking</li>
+          <li>Team Collaboration Skills</li>
+          <li>Clean Code Practices</li>
+          <li>Adaptability & Continuous Learning</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-title fade-in">
+      <h2>Technical Skills</h2>
+      <p>Technologies & Tools I Work With</p>
+    </div>
+
+    <div class="skills-grid">
+      <div class="card fade-in">
+        <h3>Backend Development</h3>
+
+        <div class="skill-bar">
+          <div class="label"><span>Java</span><span>90%</span></div>
+          <div class="progress"><span style="width:90%"></span></div>
+        </div>
+
+        <div class="skill-bar">
+          <div class="label"><span>Spring Boot</span><span>85%</span></div>
+          <div class="progress"><span style="width:85%"></span></div>
+        </div>
+
+        <div class="skill-bar">
+          <div class="label"><span>JDBC</span><span>88%</span></div>
+          <div class="progress"><span style="width:88%"></span></div>
+        </div>
+      </div>
+
+      <div class="card fade-in">
+        <h3>Frontend Development</h3>
+
+        <div class="skill-bar">
+          <div class="label"><span>HTML5</span><span>95%</span></div>
+          <div class="progress"><span style="width:95%"></span></div>
+        </div>
+
+        <div class="skill-bar">
+          <div class="label"><span>CSS3</span><span>90%</span></div>
+          <div class="progress"><span style="width:90%"></span></div>
+        </div>
+
+        <div class="skill-bar">
+          <div class="label"><span>JavaScript</span><span>82%</span></div>
+          <div class="progress"><span style="width:82%"></span></div>
+        </div>
+
+        <div class="skill-bar">
+          <div class="label"><span>React</span><span>80%</span></div>
+          <div class="progress"><span style="width:80%"></span></div>
+        </div>
+      </div>
+
+      <div class="card fade-in">
+        <h3>Database & Tools</h3>
+
+        <div class="skill-bar">
+          <div class="label"><span>PostgreSQL</span><span>85%</span></div>
+          <div class="progress"><span style="width:85%"></span></div>
+        </div>
+
+        <div class="skill-bar">
+          <div class="label"><span>MySQL</span><span>80%</span></div>
+          <div class="progress"><span style="width:80%"></span></div>
+        </div>
+
+        <div class="skill-bar">
+          <div class="label"><span>Git & GitHub</span><span>88%</span></div>
+          <div class="progress"><span style="width:88%"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-title fade-in">
+      <h2>Projects</h2>
+      <p>Highlighted Development Work</p>
+    </div>
+
+    <div class="projects-grid">
+      <div class="card fade-in">
+        <h3>JWT Authentication System</h3>
+        <p>
+          Developed a secure authentication system using Spring Boot and JWT for login, registration, and authorization with REST APIs.
+        </p>
+      </div>
+
+      <div class="card fade-in">
+        <h3>JDBC Database Management Project</h3>
+        <p>
+          Built a Java JDBC application connected with PostgreSQL for CRUD operations, database handling, and connection management.
+        </p>
+      </div>
+
+      <div class="card fade-in">
+        <h3>Full Stack Web Application</h3>
+        <p>
+          Created a responsive full stack web application using React frontend and Spring Boot backend integrated with PostgreSQL database.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="section-title fade-in">
+      <h2>Education & Learning</h2>
+      <p>Academic Journey & Continuous Learning</p>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item fade-in">
+        <div class="timeline-content">
+          <h3>Java Full Stack Development</h3>
+          <p>
+            Focused on Java programming, Spring Boot, REST APIs, React, Database Management Systems, and full stack web development.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-content">
+          <h3>Database Technologies</h3>
+          <p>
+            Practical experience with PostgreSQL, MySQL, Oracle SQL concepts, JDBC connectivity, and query optimization.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-content">
+          <h3>Frontend Technologies</h3>
+          <p>
+            Developed modern UI interfaces using HTML5, CSS3, JavaScript, and React for responsive web applications.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-content">
+          <h3>Version Control & Deployment</h3>
+          <p>
+            Hands-on experience with Git, GitHub repositories, code versioning, and collaborative development workflows.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="section-title fade-in">
+      <h2>Contact Me</h2>
+      <p>Let's Connect & Build Something Amazing</p>
+    </div>
+
+    <div class="card fade-in" style="max-width:800px;margin:auto;">
+      <p>
+        I am actively looking for opportunities as a Java Full Stack Developer, Software Engineer, or Backend Developer. Feel free to connect with me for internships, fresher opportunities, freelance work, or collaborations.
+      </p>
+
+      <div class="contact-links">
+        <a href="mailto:surajcholke1111@gmail.com">Email Me</a>
+        <a href="tel:+918390442256">Call Me</a>
+        <a href="https://www.linkedin.com/in/suraj-cholke" target="_blank">LinkedIn</a>
+        <a href="https://github.com" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Suraj Cholke | Full Stack Java Developer Portfolio</p>
+  </footer>
+
+  <script>
+    const fadeElements = document.querySelectorAll('.fade-in');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    fadeElements.forEach(el => observer.observe(el));
+
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if(pageYOffset >= sectionTop - 150) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if(link.getAttribute('href').includes(current)) {
+          link.style.color = '#38bdf8';
+        } else {
+          link.style.color = '#ffffff';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
